@@ -1,4 +1,4 @@
 # lom_api
 
-Simple comunicator API
-Project for school
+#### Simple comunicator API
+#### Project for school
