@@ -17,13 +17,21 @@ class LoginView(KnoxLoginView):
     permission_classes = (permissions.AllowAny, )
 
     def post(self, request, format=None):
-        serializer = AuthTokenSerializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        user = serializer.validated_data['user']
+        token_serializer = AuthTokenSerializer(data=request.data)
+        token_serializer.is_valid(raise_exception=True)
+        user = token_serializer.validated_data['user']
+
+        user_serializer = UserSerializer(user)
+
         login(request, user)
-        return super(LoginView, self).post(request, format=None)
+        
+        response = super(LoginView, self).post(request, format=None)
+        response.data['user'] = user_serializer.data
+
+        return Response(response.data, status=200)
 
 class RegisterView(APIView):
+    permission_classes = (permissions.AllowAny, )
 
     def post(self, request):
         serializer = RegisterUserSerializer(data=request.data)
