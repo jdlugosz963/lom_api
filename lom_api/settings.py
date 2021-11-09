@@ -26,6 +26,7 @@ SECRET_KEY = 'django-insecure-w699xg1453&j057k$g465vldjn+4*skp8!13ua=aq0s_91b@c)
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
+CORS_ORIGIN_ALLOW_ALL = True
 
 
 # Application definition
@@ -39,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'knox',
+    'corsheaders',
     'auth_api',
     'chat_api'
 ]
@@ -48,9 +50,9 @@ REST_FRAMEWORK = {
 }
 
 REST_KNOX = {
-  'TOKEN_LIMIT_PER_USER': 1,
+#   'TOKEN_LIMIT_PER_USER': 1,
 }
-
+ 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -59,6 +61,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'lom_api.urls'
