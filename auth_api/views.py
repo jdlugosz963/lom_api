@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.http.response import Http404
 from django.shortcuts import get_object_or_404
 
-from rest_framework import permissions, serializers
+from rest_framework import permissions
 from rest_framework.authtoken.serializers import AuthTokenSerializer
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -16,7 +16,7 @@ from .serializers import UserSerializer, RegisterUserSerializer
 class LoginView(KnoxLoginView):
     permission_classes = (permissions.AllowAny, )
 
-    def post(self, request, format=None):
+    def post(self, request):
         token_serializer = AuthTokenSerializer(data=request.data)
         token_serializer.is_valid(raise_exception=True)
         user = token_serializer.validated_data['user']
