@@ -12,7 +12,7 @@ class DmMessage(models.Model):
         return str(self.sender)
 
 class Group(models.Model):
-    name = models.CharField(max_length=16, null=False, unique=True)
+    name = models.CharField(max_length=16, null=False)
     owner = models.ForeignKey(User, related_name="owner_group", on_delete=models.CASCADE)
     users = models.ManyToManyField(User, related_name="users_group")
     create_date = models.DateTimeField(auto_now=True)
