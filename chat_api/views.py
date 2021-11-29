@@ -1,7 +1,6 @@
 from django.db.models.query import QuerySet
 from django.http.response import Http404
 from rest_framework.response import Response
-from rest_framework.serializers import Serializer
 from rest_framework.views import APIView
 from rest_framework import permissions
 from rest_framework import generics
@@ -76,4 +75,41 @@ class GroupDetailView(generics.RetrieveUpdateDestroyAPIView):
             raise Http404
 
         serializer = GroupSerializer(group, context={"request": self.request})
+        return Response(serializer.data)
+
+class GmsView(APIView):
+    permission_classes = (permissions.IsAuthenticated, )
+    authentication_classes = (TokenAuthentication, )
+
+    def get(self, request, pk):
+        try:
+            group = Group.objects.filter(
+                Q(owner=request.user) |
+                Q(users__in=(request.user.pk, ))
+            ).distinct().get(Q(pk=pk))
+        except Group.DoesNotExist:
+            raise Http404
+
+        serialzier = GroupMessagesSerializer(
+            group, 
+            context={"request": request}
+        )
+        
+        return Response(serialzier.data)
+
+    def post(self, request, pk):
+        try: # check is user in group TODO: Make it better
+            Group.objects.filter(
+                Q(owner=request.user) |
+                Q(users__in=(request.user.pk, ))
+            ).distinct().get(Q(pk=pk))
+        except Group.DoesNotExist:
+            raise Http404
+
+        request.data['sender'] = request.user.pk
+        request.data['reciever'] = pk
+        serializer = GmSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+
         return Response(serializer.data)

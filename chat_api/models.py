@@ -2,9 +2,9 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.base import Model
 
-class DmMessage(models.Model):
-    sender = models.ForeignKey(User, related_name="sender_dm_message", on_delete=models.CASCADE)
-    reciever = models.ForeignKey(User, related_name="receiver_dm_message", on_delete=models.CASCADE)
+class Dm(models.Model):
+    sender = models.ForeignKey(User, related_name="sender_dm", on_delete=models.CASCADE)
+    reciever = models.ForeignKey(User, related_name="receiver_dm", on_delete=models.CASCADE)
     message = models.TextField(null=False)
     create_date = models.DateTimeField(auto_now=True)
 
@@ -17,9 +17,9 @@ class Group(models.Model):
     users = models.ManyToManyField(User, related_name="users_group")
     create_date = models.DateTimeField(auto_now=True)
 
-class GmMessage(models.Model):
-    sender = models.ForeignKey(User, related_name="sender_gm_message", on_delete=models.CASCADE)
-    reciever = models.ForeignKey(Group, related_name="receiver_gm_message", on_delete=models.CASCADE)
+class Gm(models.Model):
+    sender = models.ForeignKey(User, related_name="sender_gm", on_delete=models.CASCADE)
+    reciever = models.ForeignKey(Group, related_name="receiver_gm", on_delete=models.CASCADE)
     message = models.TextField(null=False)
     create_date = models.DateTimeField(auto_now=True)
 
