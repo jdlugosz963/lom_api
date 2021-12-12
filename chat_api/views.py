@@ -63,6 +63,7 @@ class GroupDetailView(generics.RetrieveUpdateDestroyAPIView):
     def update(self, request, *args, **kwargs):
         request.data['owner'] = request.user.pk
         set_users(request)
+
         return super().update(request, *args, **kwargs)
 
     def retrieve(self, request, pk):

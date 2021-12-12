@@ -1,0 +1,12 @@
+POST http://localhost:8000/api/auth/login/
+content-type: application/json
+
+{
+    "username": "admin",
+    "password": "admin"
+}
+
+###
+
+GET http://localhost:8000/api/auth/info?username=a
+authorization: TOKEN 92844a78767178dfc15b0814373839bc80b97028f433440fcb4223088a9b8b69

@@ -1,0 +1,34 @@
+POST http://localhost:8000/api/auth/login/
+content-type: application/json
+
+{
+    "username": "jakub",
+    "password": "jakub"
+}
+
+###
+
+PUT http://localhost:8000/api/chat/groups/detail/1/
+Authorization: Token bd057a90565d85b2efa23f73deb9e5afdb4e4d56b24ba405a1cf33b66b49f4ed
+content-type: application/json
+
+{
+   "name": "Bar",
+   "users": [2]
+}
+
+###
+
+POST http://localhost:8000/api/chat/groups/
+Authorization: Token bd057a90565d85b2efa23f73deb9e5afdb4e4d56b24ba405a1cf33b66b49f4ed
+content-type: application/json
+
+{
+    "name": "Foo"
+}
+
+
+###
+
+GET http://localhost:8000/api/auth/info/?
+Authorization: Token bd057a90565d85b2efa23f73deb9e5afdb4e4d56b24ba405a1cf33b66b49f4ed

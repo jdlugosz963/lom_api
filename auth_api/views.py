@@ -2,6 +2,7 @@ from django.contrib.auth import login
 from django.contrib.auth.models import User
 from django.http.response import Http404
 from django.shortcuts import get_object_or_404
+from django.db.models import Q
 
 from rest_framework import permissions
 from rest_framework.authtoken.serializers import AuthTokenSerializer
@@ -47,6 +48,15 @@ class UserInfo(APIView):
     def get(self, request):
         user = request.GET.get("pk", request.user)
         username = request.GET.get("username", None)
+        all_users = request.GET.get("all", None)
+
+        if all_users:
+            users = User.objects.filter(~Q(username=request.user.username))
+            serializer = UserSerializer(users, many=True)
+
+            return Response(data={
+                "users": serializer.data
+            })
 
         if username:
             users = User.objects.filter(username__startswith = username)[:5]
