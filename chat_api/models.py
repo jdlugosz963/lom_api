@@ -17,6 +17,9 @@ class Group(models.Model):
     users = models.ManyToManyField(User, related_name="users_group")
     create_date = models.DateTimeField(auto_now=True)
 
+    def __str__(self):
+        return self.name
+
 class Gm(models.Model):
     sender = models.ForeignKey(User, related_name="sender_gm", on_delete=models.CASCADE)
     reciever = models.ForeignKey(Group, related_name="receiver_gm", on_delete=models.CASCADE)
