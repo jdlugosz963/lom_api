@@ -4,7 +4,7 @@ from django.db.models.base import Model
 
 class Dm(models.Model):
     sender = models.ForeignKey(User, related_name="sender_dm", on_delete=models.CASCADE)
-    reciever = models.ForeignKey(User, related_name="receiver_dm", on_delete=models.CASCADE)
+    receiver = models.ForeignKey(User, related_name="receiver_dm", on_delete=models.CASCADE)
     message = models.TextField(null=False)
     create_date = models.DateTimeField(auto_now=True)
 
@@ -22,7 +22,7 @@ class Group(models.Model):
 
 class Gm(models.Model):
     sender = models.ForeignKey(User, related_name="sender_gm", on_delete=models.CASCADE)
-    reciever = models.ForeignKey(Group, related_name="receiver_gm", on_delete=models.CASCADE)
+    receiver = models.ForeignKey(Group, related_name="receiver_gm", on_delete=models.CASCADE)
     message = models.TextField(null=False)
     create_date = models.DateTimeField(auto_now=True)
 

@@ -31,6 +31,11 @@ class DmSerializer(serializers.ModelSerializer):
         model = Dm
         fields = '__all__'
 
+class GmSimpleSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Gm
+        fields = '__all__'
+
 class GmSerializer(serializers.ModelSerializer):
     is_mine = serializers.SerializerMethodField('_is_mine')
     sender = UserSerializer(read_only=True)

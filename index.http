@@ -31,10 +31,14 @@ content-type: application/json
 ###
 
 GET http://localhost:8000/api/auth/info/?
-Authorization: Token bd057a90565d85b2efa23f73deb9e5afdb4e4d56b24ba405a1cf33b66b49f4ed
+Authorization: Token 050b960ef361d319cd5ed628d3cefa6fee480fdf710bed54d79d4b2b2fb6c936
 
 ###
 
-GET http://localhost:8000/api/chat/groups/detail/22/messages/
+POST http://localhost:8000/api/chat/groups/detail/22/messages/
 Authorization: Token b4bd0a69d9f78c9447b4f7581a8b8cc53f5732a7f6542db9a5fea093ce734b2c
 content-type: application/json
+
+{
+ "message": "test"
+}

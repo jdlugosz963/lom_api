@@ -12,6 +12,7 @@ from django.db.models.query import Q
 
 from .models import *
 from .serializers import *
+from auth_api.serializers import UserSerializer
 
 
 def set_users(request):
@@ -108,8 +109,8 @@ class GmsView(APIView):
             raise Http404
 
         request.data['sender'] = request.user.pk
-        request.data['reciever'] = pk
-        serializer = GmSerializer(data=request.data)
+        request.data['receiver'] = pk
+        serializer = GmSimpleSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
 
