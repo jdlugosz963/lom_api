@@ -50,8 +50,9 @@ REST_FRAMEWORK = {
 }
 
 REST_KNOX = {
-#   'TOKEN_LIMIT_PER_USER': 1,
+    'TOKEN_TTL': None,
 }
+
  
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

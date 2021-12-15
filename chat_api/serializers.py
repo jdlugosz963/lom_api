@@ -1,6 +1,9 @@
 from django.db.models import fields
+from django.contrib.auth.models import User
+
 from rest_framework import serializers
 from .models import *
+from auth_api.serializers import UserSerializer
 
 class GroupSerializer(serializers.ModelSerializer):
     is_mine = serializers.SerializerMethodField('_is_mine')
@@ -30,6 +33,7 @@ class DmSerializer(serializers.ModelSerializer):
 
 class GmSerializer(serializers.ModelSerializer):
     is_mine = serializers.SerializerMethodField('_is_mine')
+    sender = UserSerializer(read_only=True)
 
     def _is_mine(self, obj):
         request = self.context.get('request')

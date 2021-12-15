@@ -18,7 +18,7 @@ class Group(models.Model):
     create_date = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.name
+        return str(self.pk) + " " + self.name
 
 class Gm(models.Model):
     sender = models.ForeignKey(User, related_name="sender_gm", on_delete=models.CASCADE)
