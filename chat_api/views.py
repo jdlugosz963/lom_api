@@ -114,4 +114,6 @@ class GmsView(APIView):
         serializer.is_valid(raise_exception=True)
         serializer.save()
 
+        serializer = GmSerializer(serializer.instance)
+
         return Response(serializer.data)
